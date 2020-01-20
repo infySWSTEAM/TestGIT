@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results skipped="0" failed="0" ignored="0" total="3" passed="3">
+  <reporter-output>
+  </reporter-output>
+  <suite name="Suite" duration-ms="102617" started-at="2020-01-10T10:45:11Z" finished-at="2020-01-10T10:46:54Z">
+    <groups>
+    </groups>
+    <test name="Test" duration-ms="102617" started-at="2020-01-10T10:45:11Z" finished-at="2020-01-10T10:46:54Z">
+      <class name="DriverScript.JDA">
+        <test-method status="PASS" signature="beforeTest()[pri:0, instance:DriverScript.JDA@1a38c59b]" name="beforeTest" is-config="true" duration-ms="14773" started-at="2020-01-10T10:45:11Z" finished-at="2020-01-10T10:45:26Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- beforeTest -->
+        <test-method status="PASS" signature="JDADemandWorkBench()[pri:0, instance:DriverScript.JDA@1a38c59b]" name="JDADemandWorkBench" duration-ms="32780" started-at="2020-01-10T10:45:26Z" finished-at="2020-01-10T10:45:59Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- JDADemandWorkBench -->
+        <test-method status="PASS" signature="JDAPIMSupersession()[pri:1, instance:DriverScript.JDA@1a38c59b]" name="JDAPIMSupersession" duration-ms="20896" started-at="2020-01-10T10:45:59Z" finished-at="2020-01-10T10:46:20Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- JDAPIMSupersession -->
+        <test-method status="PASS" signature="JDASupersession()[pri:2, instance:DriverScript.JDA@1a38c59b]" name="JDASupersession" duration-ms="33547" started-at="2020-01-10T10:46:20Z" finished-at="2020-01-10T10:46:53Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- JDASupersession -->
+        <test-method status="PASS" signature="afterTest()[pri:0, instance:DriverScript.JDA@1a38c59b]" name="afterTest" is-config="true" duration-ms="470" started-at="2020-01-10T10:46:53Z" finished-at="2020-01-10T10:46:54Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- afterTest -->
+      </class> <!-- DriverScript.JDA -->
+    </test> <!-- Test -->
+  </suite> <!-- Suite -->
+</testng-results>
