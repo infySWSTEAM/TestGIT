@@ -109,7 +109,7 @@ public class JDA extends AbstractDifidoTestcase{
 		Screenshot("Inputting the search name");
 		Supersession ss = new Supersession(driver);
 		ss.dropdownclick();
-		Thread.sleep(3000);
+		Thread.sleep(8000);
 		driver.switchTo().frame("appFrame");
 		ss.Clear();
 	    driver.switchTo().frame("PromptScreenPopupFrame");
