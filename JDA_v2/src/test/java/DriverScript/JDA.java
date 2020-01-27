@@ -12,7 +12,9 @@ import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.io.Zip;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
@@ -39,8 +41,6 @@ public class JDA extends AbstractDifidoTestcase{
 	String testdatasheet;
 	String query;
 	
-	
-	
 		
 	public void Screenshot(String Filename) throws IOException
 	{
@@ -50,10 +50,11 @@ public class JDA extends AbstractDifidoTestcase{
 		//FileUtils.copyFile(file, new File(System.getProperty("user.dir")+"//Screenshots//"+ timestamp + Filename +"_" +".jpg"));
 	}	
 	
-	@BeforeTest
+	@BeforeMethod
 	public void beforeTest() throws SQLException, Exception {
 		System.setProperty("webdriver.chrome.driver", "./Drivers\\chromedriver.exe");
 		driver = new ChromeDriver();
+		driver.manage().deleteAllCookies();
 		Thread.sleep(3000);
 		exf = new ExcelFile();
 		InputStream envPropInput = new FileInputStream("./Environment\\Environment.properties");
@@ -67,7 +68,6 @@ public class JDA extends AbstractDifidoTestcase{
 		testcasename = envProp.getProperty("testcasename");
 		testdatasheet = envProp.getProperty("testdatasheet");
 		driver.get(url);
-	
 		Thread.sleep(3000);
 		driver.manage().window().maximize();
 		Database db= new Database();
@@ -90,17 +90,15 @@ public class JDA extends AbstractDifidoTestcase{
 		Thread.sleep(2000);
 		report.log("User is viewing JDA Homepage now");
 		Screenshot("HomePage");
-		//Thread.sleep(1000);
+		Thread.sleep(5000);
 	}
 	
-	@Test(priority=0)
+	@Test
 	public void JDASupersession() throws SQLException, Exception{
-		
 		exf = new ExcelFile();
 		int rowMax = exf.getTotalRowColumn(testScenarioFilePath,testCaseFileName,testdatasheet);
-		
 		for (int i=1;i<=rowMax;i++)
-		{		
+		{
 		HomePage hp= new HomePage(driver);
 		hp.setsearchname(testScenarioFilePath,testCaseFileName,testcasename,1,0);
 		Thread.sleep(5000);
@@ -109,7 +107,7 @@ public class JDA extends AbstractDifidoTestcase{
 		Screenshot("Inputting the search name");
 		Supersession ss = new Supersession(driver);
 		ss.dropdownclick();
-		Thread.sleep(8000);
+		Thread.sleep(10000);
 		driver.switchTo().frame("appFrame");
 		ss.Clear();
 	    driver.switchTo().frame("PromptScreenPopupFrame");
@@ -127,18 +125,18 @@ public class JDA extends AbstractDifidoTestcase{
 		Screenshot("Supersession records in UI");
 		Thread.sleep(5000);
 		hp.clr();
-	}
+/*		driver.manage().deleteAllCookies();
+*/	}
 }
 
 	
-	@Test(priority=1)
+	@Test
 	public void JDAPIMSupersession() throws SQLException, Exception{
 		
 		exf = new ExcelFile();
 		int rowMax = exf.getTotalRowColumn(testScenarioFilePath,testCaseFileName,testdatasheet);
-		
 		for (int i=1;i<=rowMax;i++)
-		{			
+		{
 		HomePage hp= new HomePage(driver);
 		hp.setsearchname(testScenarioFilePath,testCaseFileName,testcasename,2,0);
 		report.log("Searching for PIM Supersession UI by inputting the page name");
@@ -165,14 +163,14 @@ public class JDA extends AbstractDifidoTestcase{
 		}
 	}
 	
-	@Test(priority=2)
+	@Test
 	public void JDADemandWorkBench() throws SQLException, Exception{
 		
 		exf = new ExcelFile();
 		int rowMax = exf.getTotalRowColumn(testScenarioFilePath,testCaseFileName,testdatasheet);
 		
 		for (int i=1;i<=rowMax;i++)
-		{		
+		{
 		HomePage hp= new HomePage(driver);
 		hp.setsearchname(testScenarioFilePath,testCaseFileName,testcasename,3,0);
 		report.log("Searching for Demand workbench UI by inputting the page name");
@@ -201,10 +199,10 @@ public class JDA extends AbstractDifidoTestcase{
 		Thread.sleep(2000);
 		hp.clr();
 	}
-	}
+			}
 
 		
-	@AfterTest
+	@AfterMethod
 	public void JDALogout() throws InterruptedException, IOException, SQLException
 	{
 		LoginPage lp= new LoginPage(driver);
@@ -215,9 +213,10 @@ public class JDA extends AbstractDifidoTestcase{
 		Screenshot("User logout options");
 		lp.JDAlogout();
 		Thread.sleep(2000);
-		report.log("User logging out of JDA UI ");
+		report.log("User logging out of JDA UI");
 		Screenshot("User Logged out");
 		driver.quit();
-		Zip.zip(new File("./target/surefire-reports/difido/current"));
-	}
-	}
+		Thread.sleep(2000);
+}
+/*	Zip.zip(new File("./target/surefire-reports/difido/current"));
+*/	}
